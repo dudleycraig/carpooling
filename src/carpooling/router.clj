@@ -3,18 +3,28 @@
   (:require [reitit.core :as reitit]
             [reitit.ring :as ring]
             [reitit.coercion.spec]
+            [carpooling.samferda.api :as samferda-api]
             [cheshire.core :as json]))
 
-(defn root-handler 
-  "/ http handler"
+(defn passengers-handler 
+  "/passengers request"
   [_]
   {:name ::root
    :status 200
    :headers {"Content-Type" "application/json; charset=utf-8"}
-   :body (json/encode {:testing "http response"})})
+   :body (samferda-api/get-passengers)})
+
+(defn drivers-handler 
+  "/drivers request"
+  [_]
+  {:name ::root
+   :status 200
+   :headers {"Content-Type" "application/json; charset=utf-8"}
+   :body (samferda-api/get-drivers)})
 
 (def routes
-  ["/" {:get root-handler}])
+  [["/passengers" {:get passengers-handler}]
+   ["/drivers" {:get drivers-handler}]])
 
 (defn router []
   (ring/ring-handler
