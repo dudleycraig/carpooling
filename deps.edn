@@ -1,0 +1,24 @@
+{:paths ["src" "resources"]
+ :description "assessment for HUDstats"
+ :deps
+ {org.clojure/clojure {:mvn/version "1.10.1"}
+  integrant/integrant {:mvn/version "0.8.0"}
+  integrant/repl {:mvn/version "0.3.2"}
+  cprop/cprop {:mvn/version "0.1.17"}
+  ring/ring-jetty-adapter {:mvn/version "1.9.3"}
+  metosin/reitit {:mvn/version "0.5.13"}
+  metosin/reitit-middleware {:mvn/version "0.5.13"}
+  cheshire/cheshire {:mvn/version "5.9.0"}}
+ :repl-options {:init-ns user}
+ :aliases
+ {:run {:main-opts ["-m" "carpooling.core"]}
+  :dev
+  {:extra-paths ["dev"]
+   :extra-deps {integrant/repl {:mvn/version "0.3.2"}}}
+  :test {:extra-paths ["test"]
+         :extra-deps {lambdaisland/kaocha {:mvn/version "1.0.732"}
+                      lambdaisland/kaocha-cloverage {:mvn/version "1.0.75"}}
+         :main-opts ["-m" "kaocha.runner"]}}}
+
+
+
